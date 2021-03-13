@@ -2,9 +2,30 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const models = require("../models");
 
-const TOKEN = "dsgsDrsg24zetzXE5656ztzetzyVFAE";
+const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!.@#$%^&*])(?=.{8,})/;
 
 exports.signup = (req, res, next) => {
+  if (
+    req.body.email == null ||
+    req.body.name == null ||
+    req.body.firstname == null ||
+    req.body.password == null
+  ) {
+    return res
+      .status(400)
+      .json({ error: "Merci de remplir tous les champs !" });
+  }
+  if (!EMAIL_REGEX.test(req.body.email)) {
+    return res.status(406).json({ error: "Email incorrect !" });
+  }
+  if (!PASSWORD_REGEX.test(req.body.password)) {
+    return res.status(406).json({
+      error:
+        "Minimum: 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère (!.@#$%^&*)",
+    });
+  }
+
   bcrypt
     .hash(req.body.password, 10)
     .then((hash) => {
@@ -16,13 +37,9 @@ exports.signup = (req, res, next) => {
         isAdmin: false,
       })
         .then((user) => {
-          console.log(JSON.parse(user.id));
           res.status(201).json({
             userId: user.id,
             isAdmin: user.isAdmin,
-            token: jwt.sign({ userId: user.id }, TOKEN, {
-              expiresIn: "24h",
-            }),
           });
         })
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
@@ -32,7 +49,17 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-  User.findOne({ email: req.body.email })
+  if (req.body.email == null || req.body.password == null) {
+    return res
+      .status(400)
+      .json({ error: "Merci de remplir tous les champs !" });
+  }
+
+  models.User.findOne({
+    where: {
+      email: req.body.email,
+    },
+  })
     .then((user) => {
       if (!user) {
         return res.status(401).json({ error: "Utilisateur non trouvé !" });
@@ -44,15 +71,13 @@ exports.login = (req, res, next) => {
             return res.status(401).json({ error: "Mot de passe incorrect !" });
           }
           res.status(200).json({
-            userId: user._id,
+            userId: user.id,
+            name: user.name,
+            firstname: user.firstname,
             isAdmin: user.isAdmin,
-            token: jwt.sign(
-              { userId: user._id },
-              "dsgsDrsg24zetzXE5656ztzetzyVFAE",
-              {
-                expiresIn: "24h",
-              }
-            ),
+            token: jwt.sign({ userId: user.id }, "RANDOM_TOKEN_SECRET", {
+              expiresIn: "24h",
+            }),
           });
         })
         .catch((error) => res.status(500).json({ error }));
