@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const User = require("../models//user");
+const User = require("../models");
 
 exports.signup = (req, res, next) => {
   bcrypt
@@ -11,9 +11,19 @@ exports.signup = (req, res, next) => {
         name: req.body.name,
         firstname: req.body.firstname,
         password: hash,
-      });
-      user
-        .save()
+        isAdmin: false,
+      })
+        .then((user) => {
+          res.status(201).json({
+            userId: user.id,
+            isAdmin: user.isAdmin,
+            token: jwt.sign(
+              { userId: user.id },
+              process.env.JWT_RAND_SECRET,
+              { expiresIn: "24h" }
+            ),
+          });
+        })
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
         .catch((error) => res.status(400).json({ error }));
     })
@@ -34,7 +44,8 @@ exports.login = (req, res, next) => {
           }
           res.status(200).json({
             userId: user._id,
-            token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", {
+            isAdmin: user.isAdmin,
+            token: jwt.sign({ userId: user._id }, "dsgsDrsg24zetzXE5656ztzetzyVFAE", {
               expiresIn: "24h",
             }),
           });

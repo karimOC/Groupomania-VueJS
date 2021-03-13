@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const messageCtrl = require("../controllers/message");
+const auth = require("../middleware/auth");
 
-router.get("/", messageCtrl.getAllMessage);
-// router.post("/", messageCtrl.createMessage);
-// router.get("/:id", messageCtrl.getOneMessage);
-// router.put("/:id", messageCtrl.modifyMessage);
-// router.delete("/:id", messageCtrl.deleteMessage);
+router.get("/", auth, messageCtrl.getAllMessage);
+// router.post("/", auth, messageCtrl.createMessage);
+// router.get("/:id", auth, messageCtrl.getOneMessage);
+// router.put("/:id", auth, messageCtrl.modifyMessage);
+// router.delete("/:id", auth, messageCtrl.deleteMessage);
 
 module.exports = router;
