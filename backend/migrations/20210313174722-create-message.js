@@ -9,21 +9,27 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       idUsers: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       title: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       content: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       image: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       likes: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       dislikes: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       createdAt: {
