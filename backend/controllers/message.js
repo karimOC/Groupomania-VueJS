@@ -99,7 +99,7 @@ exports.getAllMessage = (req, res, next) => {
   })
     .then((message) => {
       if (message === null) {
-        return res.status(404).json({ error: "post don't find" });
+        return res.status(404).json({ error: "Post don't find" });
       }
       res.status(200).json({ message });
     })
