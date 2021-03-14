@@ -1,6 +1,13 @@
-const Message = require("../models/message");
+const models = require("../models");
 
 exports.createMessage = (req, res, next) => {
+  const title = req.body.title;
+  const comment = req.body.comment;
+
+  if (title.length < 2 || comment.length < 2) {
+    return res.status(400).json({ error: "Merci de remplir tous les champs." });
+  }
+
   models.Message.create({
     UserId: userId,
     title: req.body.title,
@@ -10,7 +17,7 @@ exports.createMessage = (req, res, next) => {
     like: 0,
   })
     .then((message) =>
-      res.status(201).json({ message: "Post save successfully ! "})
+      res.status(201).json({ message: "Post save successfully ! " })
     )
     .catch((error) => res.status(500).json({ error }));
 };
