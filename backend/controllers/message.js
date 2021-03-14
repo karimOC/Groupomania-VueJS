@@ -25,6 +25,64 @@ exports.createMessage = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
+exports.getAllMessage = (req, res, next) => {
+  models.Message.findAll({
+    attributes: [
+      "id",
+      "idUsers",
+      "title",
+      "content",
+      "image",
+      "likes",
+      "dislikes",
+      "createdAt",
+      "updatedAt",
+    ],
+  })
+    .then((messages) => {
+      res.status(200).json(messages);
+    })
+    .catch((error) => {
+      res.status(400).json({
+        error: error,
+      });
+    });
+};
+
+// exports.getAllMessage = (req, res, next) => {
+//   models.Message.findAll({
+//     attributes: [
+//       "id",
+//       "UserId",
+//       "title",
+//       "content",
+//       "image",
+//       "likes",
+//       "dislikes",
+//       "createdAt",
+//       "updatedAt",
+//     ],
+//     order: [["updatedAt", "DESC"]],
+//     // include: [
+//     //   {
+//     //     model: models.User,
+//     //     attributes: ["name"],
+//     //   },
+//     //   {
+//     //     model: models.Message,
+//     //     attributes: ["message"],
+//     //   },
+//     // ],
+//   })
+//     .then((message) => {
+//       if (message === null) {
+//         return res.status(404).json({ error: "Post don't find" });
+//       }
+//       res.status(200).json({ message });
+//     })
+//     .catch((error) => res.status(400).json({ error: error }));
+// };
+
 // exports.getOneMessage = (req, res, next) => {
 //   models.Message.findOne({
 //     attributes: [
@@ -90,38 +148,4 @@ exports.createMessage = (req, res, next) => {
 //         error: error,
 //       });
 //     });
-// };
-
-// exports.getAllMessage = (req, res, next) => {
-//   models.Message.findAll({
-//     attributes: [
-//       "id",
-//       "UserId",
-//       "title",
-//       "content",
-//       "image",
-//       "likes",
-//       "dislikes",
-//       "createdAt",
-//       "updatedAt",
-//     ],
-//     order: [["updatedAt", "DESC"]],
-//     include: [
-//       {
-//         model: models.User,
-//         attributes: ["name"],
-//       },
-//       {
-//         model: models.Message,
-//         attributes: ["message"],
-//       },
-//     ],
-//   })
-//     .then((message) => {
-//       if (message === null) {
-//         return res.status(404).json({ error: "Post don't find" });
-//       }
-//       res.status(200).json({ message });
-//     })
-//     .catch((error) => res.status(400).json({ error: error }));
 // };
