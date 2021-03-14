@@ -74,38 +74,19 @@ exports.getOneMessage = (req, res, next) => {
     });
 };
 
-// exports.modifyMessage = (req, res, next) => {
-//   const message = new Message({
-//     id: req.params.id,
-//     title: req.body.title,
-//     content: req.body.content,
-//     image: req.body.image,
-//     likes: req.body.likes,
-//     dislikes: req.body.dislikes,
-//   });
-//   models.Message.updateOne({ id: req.params.id }, message)
-//     .then(() => {
-//       res.status(201).json({
-//         message: "Message updated successfully!",
-//       });
-//     })
-//     .catch((error) => {
-//       res.status(400).json({
-//         error: error,
-//       });
-//     });
-// };
-
-// exports.deleteMessage = (req, res, next) => {
-//   models.Message.deleteOne({ id: req.params.id })
-//     .then(() => {
-//       res.status(200).json({
-//         message: "Deleted!",
-//       });
-//     })
-//     .catch((error) => {
-//       res.status(400).json({
-//         error: error,
-//       });
-//     });
-// };
+exports.deleteMessage = (req, res, next) => {
+  models.Message.findOne({
+    where: { id: req.params.id },
+  })
+    .then(() => {
+      models.Message.destroy({ where: { id: req.params.id } });
+      res.status(200).json({
+        message: "Deleted!",
+      });
+    })
+    .catch((error) => {
+      res.status(400).json({
+        error: error,
+      });
+    });
+};
