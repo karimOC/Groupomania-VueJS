@@ -49,70 +49,30 @@ exports.getAllMessage = (req, res, next) => {
     });
 };
 
-// exports.getAllMessage = (req, res, next) => {
-//   models.Message.findAll({
-//     attributes: [
-//       "id",
-//       "UserId",
-//       "title",
-//       "content",
-//       "image",
-//       "likes",
-//       "dislikes",
-//       "createdAt",
-//       "updatedAt",
-//     ],
-//     order: [["updatedAt", "DESC"]],
-//     // include: [
-//     //   {
-//     //     model: models.User,
-//     //     attributes: ["name"],
-//     //   },
-//     //   {
-//     //     model: models.Message,
-//     //     attributes: ["message"],
-//     //   },
-//     // ],
-//   })
-//     .then((message) => {
-//       if (message === null) {
-//         return res.status(404).json({ error: "Post don't find" });
-//       }
-//       res.status(200).json({ message });
-//     })
-//     .catch((error) => res.status(400).json({ error: error }));
-// };
-
-// exports.getOneMessage = (req, res, next) => {
-//   models.Message.findOne({
-//     attributes: [
-//       "id",
-//       "UserId",
-//       "title",
-//       "content",
-//       "image",
-//       "likes",
-//       "dislikes",
-//       "createdAt",
-//       "updatedAt",
-//     ],
-//     where: { id: req.params.id },
-//     include: [
-//       {
-//         model: models.User,
-//         attributes: ["name"],
-//       },
-//     ],
-//   })
-//     .then((message) => {
-//       res.status(200).json(message);
-//     })
-//     .catch((error) => {
-//       res.status(404).json({
-//         error: error,
-//       });
-//     });
-// };
+exports.getOneMessage = (req, res, next) => {
+  models.Message.findOne({
+    attributes: [
+      "id",
+      "idUsers",
+      "title",
+      "content",
+      "image",
+      "likes",
+      "dislikes",
+      "createdAt",
+      "updatedAt",
+    ],
+    where: { id: req.params.id },
+  })
+    .then((message) => {
+      res.status(200).json(message);
+    })
+    .catch((error) => {
+      res.status(404).json({
+        error: error,
+      });
+    });
+};
 
 // exports.modifyMessage = (req, res, next) => {
 //   const message = new Message({
