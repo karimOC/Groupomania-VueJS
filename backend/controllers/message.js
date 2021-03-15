@@ -18,8 +18,6 @@ exports.createMessage = (req, res, next) => {
     title: title,
     content: content,
     image: req.body.image,
-    likes: 0,
-    dislikes: 0,
   })
     .then(() => res.status(201).json({ message: "Message enregistré !" }))
     .catch((error) => res.status(400).json({ error }));
@@ -33,8 +31,6 @@ exports.getAllMessage = (req, res, next) => {
       "title",
       "content",
       "image",
-      "likes",
-      "dislikes",
       "createdAt",
       "updatedAt",
     ],
@@ -57,8 +53,6 @@ exports.getOneMessage = (req, res, next) => {
       "title",
       "content",
       "image",
-      "likes",
-      "dislikes",
       "createdAt",
       "updatedAt",
     ],
@@ -89,4 +83,76 @@ exports.deleteMessage = (req, res, next) => {
         error: error,
       });
     });
+};
+
+exports.likeDislikeMessage = (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+  const userId = decodedToken.userId;
+
+  models.Message.findOne({
+    attributes: [
+      "id",
+      "idUsers",
+    ],
+    where: { id: req.params.id, idUsers: userId },
+  });
+
+  const like = req.body.like;
+  if (like === 1) {
+    models.Message.updateOne(
+      { where: { id: req.params.id } },
+      {
+        $push: { usersLiked: userId },
+        $inc: { likes: +1 },
+      }
+    )
+      .then(() => res.status(200).json({ message: "Like ajouté !" }))
+      .catch((error) => res.status(400).json({ error }));
+  }
+
+  // if (like === -1) {
+  //   models.Message.updateOne(
+  //     { where: { id: req.params.id } },
+  //     {
+  //       $push: { usersDisliked: userId },
+  //       $inc: { dislikes: -1 },
+  //     }
+  //   )
+  //     .then(() => {
+  //       res.status(200).json({ message: "Dislike ajouté !" });
+  //     })
+  //     .catch((error) => res.status(400).json({ error }));
+  // }
+
+  // if (like === 0) {
+  //   models.Message.findOne({
+  //     where: { id: req.params.id, idUsers: userId },
+  //   })
+  //     .then((message) => {
+  //       if (message.usersLiked.includes(userId)) {
+  //         models.Message.updateOne(
+  //           { id: id },
+  //           {
+  //             $pull: { usersLiked: userId },
+  //             $inc: { likes: -1 },
+  //           }
+  //         )
+  //           .then(() => res.status(200).json({ message: "Like retiré !" }))
+  //           .catch((error) => res.status(400).json({ error }));
+  //       }
+  //       if (message.usersDisliked.includes(userId)) {
+  //         models.Message.updateOne(
+  //           { id: id },
+  //           {
+  //             $pull: { usersDisliked: userId },
+  //             $inc: { dislikes: -1 },
+  //           }
+  //         )
+  //           .then(() => res.status(200).json({ message: "Dislike retiré !" }))
+  //           .catch((error) => res.status(400).json({ error }));
+  //       }
+  //     })
+  //     .catch((error) => res.status(404).json({ error }));
+  // }
 };

@@ -1,0 +1,64 @@
+const models = require("../models");
+const jwt = require("jsonwebtoken");
+
+exports.createComment = (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+  const userId = decodedToken.userId;
+  console.log(req.params.id);
+
+  if (req.body.comment.length < 0) {
+    return res
+      .status(400)
+      .json({ error: "Merci de remplir le champ commentaire." });
+  }
+
+  models.Comment.create({
+    idUsers: userId,
+    idMessages: req.params.id,
+    comment: req.body.comment,
+  })
+    .then(() => res.status(200).json({ message: "Commentaire enregistré !" }))
+    .catch((error) => res.status(500).json(error));
+};
+
+exports.getAllComment = (req, res, next) => {
+  models.Comment.findAll({
+    where: {
+      idMessages: req.params.id,
+    },
+  })
+    .then((comments) => {
+      res.status(200).json(comments);
+    })
+    .catch((error) => {
+      res.status(400).json({
+        error: error,
+      });
+    });
+};
+
+exports.deleteComment = (req, res, next) => {
+  models.Comment.findOne({
+    where: {
+      idMessages: req.params.idMessages,
+      id: req.params.id,
+    },
+  })
+    .then(() => {
+      models.Comment.destroy({
+        where: {
+          idMessages: req.params.idMessages,
+          id: req.params.id,
+        },
+      });
+      res.status(200).json({
+        message: "Commentaire supprimé!",
+      });
+    })
+    .catch((error) => {
+      res.status(400).json({
+        error: error,
+      });
+    });
+};

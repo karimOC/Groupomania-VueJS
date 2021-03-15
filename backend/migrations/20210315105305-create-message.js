@@ -14,6 +14,7 @@ module.exports = {
       },
       title: {
         allowNull: false,
+
         type: Sequelize.STRING
       },
       content: {
@@ -23,14 +24,6 @@ module.exports = {
       image: {
         allowNull: true,
         type: Sequelize.STRING
-      },
-      likes: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      dislikes: {
-        allowNull: false,
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
