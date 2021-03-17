@@ -5,7 +5,6 @@ exports.createComment = (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
   const userId = decodedToken.userId;
-  console.log(req.params.id);
 
   if (req.body.comment.length < 0) {
     return res
@@ -39,26 +38,31 @@ exports.getAllComment = (req, res, next) => {
 };
 
 exports.deleteComment = (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+  const userId = decodedToken.userId;
+  const isAdmin = decodedToken.isAdmin;
+
   models.Comment.findOne({
     where: {
       idMessages: req.params.idMessages,
       id: req.params.id,
     },
-  })
-    .then(() => {
-      models.Comment.destroy({
-        where: {
-          idMessages: req.params.idMessages,
-          id: req.params.id,
-        },
-      });
-      res.status(200).json({
-        message: "Commentaire supprimé!",
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
-        error: error,
-      });
-    });
+  }).then((comment) => {
+    if (comment.idUsers === userId || isAdmin === true) {
+      comment
+        .destroy()
+        .then(() => {
+          res.status(200).json({
+            message: "Commentaire supprimé !",
+          });
+        })
+        .catch((error) => {
+          res.status(400).json({
+            error: error,
+            message: "Le commentaire n'a pas pu être supprimé",
+          });
+        });
+    }
+  });
 };
