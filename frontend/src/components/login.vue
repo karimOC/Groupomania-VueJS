@@ -42,10 +42,10 @@ export default {
           password: this.password,
         })
         .then((res) => {
-          console.log(res);
-          console.log("Mon token: ", res.data.token);
           {
-            localStorage.setItem("token", JSON.stringify(res.data.token));
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("userName", res.data.name);
+            localStorage.setItem("userFirstname", res.data.firstname);
           }
           this.$router.push("/feed");
         })

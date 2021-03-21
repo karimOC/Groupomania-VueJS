@@ -2,11 +2,6 @@
   <div>
     <a href="/"><img id="logo" src="./assets/logo.png" alt="logo" /></a>
   </div>
-  <div id="nav">
-    <router-link to="/login">Se connecter</router-link> |
-    <router-link to="/register">S'enregistrer</router-link> |
-    <router-link to="/feed"></router-link>
-  </div>
   <router-view />
 </template>
 
@@ -24,7 +19,7 @@
 }
 
 #nav {
-  padding: 30px;
+  padding: 20px;
   a {
     font-weight: bold;
     color: black;
