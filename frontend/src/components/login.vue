@@ -44,8 +44,6 @@ export default {
         .then((res) => {
           {
             localStorage.setItem("token", res.data.token);
-            localStorage.setItem("userName", res.data.name);
-            localStorage.setItem("userFirstname", res.data.firstname);
           }
           this.$router.push("/feed");
         })

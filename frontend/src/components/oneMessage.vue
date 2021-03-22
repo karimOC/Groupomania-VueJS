@@ -5,19 +5,13 @@
     <a to="/login" v-on:click="Logout()"> Déconnexion</a>
   </div>
   <div>
-    <newMessage />
-  </div>
-  <div>
-    <div id="feed">
-      <div id="message-card" v-for="message in allMessages" :key="message.id">
-        <a href="">
-          <h2 class="title">{{ message.title }}</h2>
-          <div class="content">{{ message.content }}</div>
-          <p></p>
-          <div class="createdAt">
-            {{ message.createdAt }}
-          </div>
-        </a>
+    <div id="oneMessage">
+      <div id="message-card" v-for="comment in allComments" :key="comment.id">
+        <div class="content">{{ comment.comment }}</div>
+        <p></p>
+        <div class="createdAt">
+          {{ comment.createdAt }}
+        </div>
       </div>
     </div>
   </div>
@@ -26,37 +20,39 @@
 
 
 <script>
-import newMessage from "./newMessage";
 import axios from "axios";
 
 export default {
   name: "feed",
-  components: {
-    newMessage,
+  props: {
+    idUsers: Number,
+    idMessages: Number,
+    comment: String,
+    createAt: Date,
   },
   data() {
     return {
       data: {
         token: "",
-        allMessages: [],
+        allComments: [],
         id: "",
         idUsers: "",
-        title: "",
-        content: "",
+        idMessages: "",
+        comments: "",
         createAt: "",
       },
     };
   },
   methods: {
-    loadFeed() {
+    loadMessage() {
       let token = localStorage.getItem("token");
       axios
-        .get("http://localhost:3000/api/messages/", {
+        .get("http://localhost:3000/api/messages/2/comments/", {
           headers: { Authorization: "Bearer " + token },
         })
         .then((res) => {
-          this.allMessages = res.data;
-          console.log(this.allMessages);
+          this.allComments = res.data;
+          console.log(this.allComments);
         })
         .catch((error) => {
           console.log({ error });
@@ -68,13 +64,13 @@ export default {
     },
   },
   mounted() {
-    this.loadFeed();
+    this.loadMessage();
   },
 };
 </script>
 
 <style scoped>
-#feed {
+#oneMessage {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -84,17 +80,8 @@ export default {
   border: solid 2px;
   margin-bottom: 15px;
   padding: 10px;
-  line-height: normal;
 }
-a {
-  text-decoration: none;
-  color: black;
-}
-h2 {
-  padding-bottom: 15px;
-  border-bottom: solid 1px;
-}
-.content {
+.comment {
   font-size: 20px;
 }
 .createdAt {

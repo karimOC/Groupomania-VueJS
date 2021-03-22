@@ -21,6 +21,11 @@ const routes = [
     path: '/feed',
     name: 'feed',
     component: () => import(/* webpackChunkName: "about" */ '../components/feed.vue')
+  },
+  {
+    path: '/oneMessage',
+    name: 'oneMessage',
+    component: () => import(/* webpackChunkName: "about" */ '../components/oneMessage.vue')
   }
 ]
 
