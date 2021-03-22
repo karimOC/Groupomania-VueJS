@@ -1,12 +1,7 @@
 <template>
-  <div id="nav">
-    <router-link to="/feed">Accueil </router-link> |
-    <router-link to="/login"> Profil</router-link> |
-    <a to="/login" v-on:click="Logout()"> Déconnexion</a>
-  </div>
   <div>
     <div id="oneMessage">
-      <div id="message-card" v-for="comment in allComments" :key="comment.id">
+      <div id="comment-card" v-for="comment in allComments" :key="comment.id">
         <div class="content">{{ comment.comment }}</div>
         <p></p>
         <div class="createdAt">
@@ -15,7 +10,6 @@
       </div>
     </div>
   </div>
-  <router-view />
 </template>
 
 
@@ -23,13 +17,7 @@
 import axios from "axios";
 
 export default {
-  name: "feed",
-  props: {
-    idUsers: Number,
-    idMessages: Number,
-    comment: String,
-    createAt: Date,
-  },
+  name: "oneMessage",
   data() {
     return {
       data: {
@@ -44,10 +32,10 @@ export default {
     };
   },
   methods: {
-    loadMessage() {
+    loadComments() {
       let token = localStorage.getItem("token");
       axios
-        .get("http://localhost:3000/api/messages/2/comments/", {
+        .get("http://localhost:3000/api/messages/1/comments/", {
           headers: { Authorization: "Bearer " + token },
         })
         .then((res) => {
@@ -58,13 +46,9 @@ export default {
           console.log({ error });
         });
     },
-    Logout() {
-      localStorage.clear();
-      this.$router.push("/login");
-    },
   },
   mounted() {
-    this.loadMessage();
+    this.loadComments();
   },
 };
 </script>
@@ -75,7 +59,7 @@ export default {
   align-items: center;
   flex-direction: column;
 }
-#message-card {
+#comment-card {
   width: 50%;
   border: solid 2px;
   margin-bottom: 15px;

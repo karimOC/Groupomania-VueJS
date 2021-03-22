@@ -1,8 +1,8 @@
 <template>
   <div>
     <a href="/"><img id="logo" src="./assets/logo.png" alt="logo" /></a>
+    <router-view />
   </div>
-  <router-view />
 </template>
 
 <style lang="scss">

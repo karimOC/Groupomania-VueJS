@@ -1,38 +1,44 @@
 <template>
-  <div id="nav">
-    <router-link to="/feed">Accueil </router-link> |
-    <router-link to="/login"> Profil</router-link> |
-    <a to="/login" v-on:click="Logout()"> Déconnexion</a>
-  </div>
   <div>
-    <newMessage />
-  </div>
-  <div>
-    <div id="feed">
-      <div id="message-card" v-for="message in allMessages" :key="message.id">
-        <a href="">
-          <h2 class="title">{{ message.title }}</h2>
-          <div class="content">{{ message.content }}</div>
-          <p></p>
-          <div class="createdAt">
-            {{ message.createdAt }}
+    <div id="nav">
+      <router-link to="/feed">Accueil </router-link> |
+      <router-link to="/login"> Profil</router-link> |
+      <a to="/login" v-on:click="Logout()"> Déconnexion</a>
+    </div>
+    <div>
+      <newMessage />
+    </div>
+    <div>
+      <div id="feed">
+        <div id="message-card" v-for="message in allMessages" :key="message.id">
+          <a href="">
+            <h2 class="title">{{ message.title }}</h2>
+            <div class="content">{{ message.content }}</div>
+            <p></p>
+            <div class="createdAt">
+              {{ message.createdAt }}
+            </div>
+          </a>
+          <div class="commentaire">
+            <newComment />
           </div>
-        </a>
+        </div>
       </div>
     </div>
   </div>
-  <router-view />
 </template>
 
 
 <script>
 import newMessage from "./newMessage";
+import newComment from "./newComment";
 import axios from "axios";
 
 export default {
   name: "feed",
   components: {
     newMessage,
+    newComment,
   },
   data() {
     return {
@@ -101,5 +107,8 @@ h2 {
   font-size: 11px;
   display: flex;
   justify-content: space-between;
+}
+.commentaire {
+  margin-top: 15px;
 }
 </style>

@@ -24,7 +24,7 @@
 import axios from "axios";
 
 export default {
-  name: "feed",
+  name: "newMessage",
   data() {
     return {
       data: {
@@ -34,7 +34,7 @@ export default {
     };
   },
   methods: {
-    async buttonNewMessage() {
+    buttonNewMessage() {
       const data = {
         title: this.title,
         content: this.content,
@@ -46,7 +46,7 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          alert('Votre message a bien été envoyé !')
+          alert("Votre message a bien été envoyé !");
           document.location.reload();
           this.$router.push("/feed");
         })
@@ -65,7 +65,10 @@ export default {
 input {
   border: solid rgb(143, 143, 143) 1px;
   margin-bottom: 5px;
-  width: 20%;
+  width: 30%;
+}
+textarea {
+  width: 30%;
 }
 button {
   margin-bottom: 50px;
