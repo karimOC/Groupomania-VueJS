@@ -23,6 +23,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../components/feed.vue')
   },
   {
+    path: '/profile',
+    name: 'profile',
+    component: () => import(/* webpackChunkName: "about" */ '../components/profile.vue')
+  },
+  {
     path: '/oneMessage',
     name: 'oneMessage',
     component: () => import(/* webpackChunkName: "about" */ '../components/oneMessage.vue')

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div id="nav"><router-link to="/feed">Retour</router-link></div>
     <div id="oneMessage">
       <div id="comment-card" v-for="comment in allComments" :key="comment.id">
         <div class="content">{{ comment.comment }}</div>

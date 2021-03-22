@@ -2,7 +2,7 @@
   <div>
     <div id="nav">
       <router-link to="/feed">Accueil </router-link> |
-      <router-link to="/login"> Profil</router-link> |
+      <router-link to="/profile"> Profil</router-link> |
       <a to="/login" v-on:click="Logout()"> Déconnexion</a>
     </div>
     <div>
