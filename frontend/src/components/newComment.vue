@@ -22,9 +22,7 @@ export default {
   name: "newComment",
   data() {
     return {
-      data: {
         comment: "",
-      },
     };
   },
   methods: {
@@ -46,9 +44,6 @@ export default {
           console.log({ error });
         });
     },
-  },
-  mounted() {
-    this.buttonNewComment();
   },
 };
 </script>

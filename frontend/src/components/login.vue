@@ -27,11 +27,10 @@ export default {
   name: "login",
   data() {
     return {
-      data: {
         token: "",
         email: "",
         password: "",
-      },
+        userId: "",
     };
   },
   methods: {
@@ -44,6 +43,7 @@ export default {
         .then((res) => {
           {
             localStorage.setItem("token", res.data.token);
+            localStorage.setItem("id", res.data.userId);
           }
           this.$router.push("/feed");
         })

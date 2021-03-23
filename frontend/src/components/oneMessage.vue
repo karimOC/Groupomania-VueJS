@@ -21,7 +21,6 @@ export default {
   name: "oneMessage",
   data() {
     return {
-      data: {
         token: "",
         allComments: [],
         id: "",
@@ -29,7 +28,6 @@ export default {
         idMessages: "",
         comments: "",
         createAt: "",
-      },
     };
   },
   methods: {

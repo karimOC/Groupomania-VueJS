@@ -27,10 +27,8 @@ export default {
   name: "newMessage",
   data() {
     return {
-      data: {
-        title: "",
-        content: "",
-      },
+      title: "",
+      content: "",
     };
   },
   methods: {
@@ -54,9 +52,6 @@ export default {
           console.log({ error });
         });
     },
-  },
-  mounted() {
-    this.buttonNewMessage();
   },
 };
 </script>

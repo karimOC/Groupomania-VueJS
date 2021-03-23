@@ -46,12 +46,10 @@ export default {
   name: "register",
   data() {
     return {
-      data: {
         email: "",
         name: "",
         firstname: "",
         password: "",
-      },
     };
   },
   methods: {
@@ -66,14 +64,11 @@ export default {
         .post("http://localhost:3000/api/auth/signup", data)
         .then((res) => {
           console.log(res);
-          this.$router.push("/");
+          this.$router.push("/login");
         })
         .catch((error) => {
           console.log({ error });
         });
-    },
-    mounted() {
-      this.buttonSignup();
     },
   },
 };
