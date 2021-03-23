@@ -23,7 +23,6 @@
 </template>
 
 <script>
-// import oneMessage from "./oneMessage";
 import newComment from "./newComment";
 import deleteMessage from "./deleteMessage";
 import axios from "axios";
@@ -31,7 +30,6 @@ import axios from "axios";
 export default {
   name: "loadMessages",
   components: {
-    // oneMessage,
     newComment,
     deleteMessage,
   },
@@ -103,6 +101,6 @@ h2 {
 .one-message {
   background-color: black;
   color: white;
-  padding: 3px;
+  padding: 4px;
 }
 </style>

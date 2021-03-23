@@ -18,13 +18,11 @@
 import axios from "axios";
 
 export default {
-  props: {
-    id: Number,
-  },
   name: "oneMessage",
   data() {
     return {
       token: "",
+      id: this.$route.params.id,
       allComments: [],
       idUsers: "",
       idMessages: "",
