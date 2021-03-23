@@ -10,16 +10,19 @@ import axios from "axios";
 
 export default {
   name: "deleteMessage",
+  props: {
+    id: Number,
+  },
   data() {
     return {
-        token: "",
+      token: "",
     };
   },
   methods: {
     deleteMessage() {
       let token = localStorage.getItem("token");
       axios
-        .delete("http://localhost:3000/api/messages/10", {
+        .delete("http://localhost:3000/api/messages/" + this.id, {
           headers: { Authorization: "Bearer " + token },
         })
         .catch((error) => {

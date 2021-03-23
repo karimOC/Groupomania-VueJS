@@ -18,23 +18,25 @@
 import axios from "axios";
 
 export default {
+  props: {
+    id: Number,
+  },
   name: "oneMessage",
   data() {
     return {
-        token: "",
-        allComments: [],
-        id: "",
-        idUsers: "",
-        idMessages: "",
-        comments: "",
-        createAt: "",
+      token: "",
+      allComments: [],
+      idUsers: "",
+      idMessages: "",
+      comments: "",
+      createAt: "",
     };
   },
   methods: {
     loadComments() {
       let token = localStorage.getItem("token");
       axios
-        .get("http://localhost:3000/api/messages/1/comments/", {
+        .get("http://localhost:3000/api/messages/" + this.id + "/comments/", {
           headers: { Authorization: "Bearer " + token },
         })
         .then((res) => {

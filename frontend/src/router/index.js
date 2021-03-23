@@ -48,7 +48,7 @@ const routes = [
     },
   },
   {
-    path: "/oneMessage",
+    path: "/oneMessage/:id",
     name: "oneMessage",
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/oneMessage.vue"),

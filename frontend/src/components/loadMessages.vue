@@ -2,6 +2,9 @@
   <div>
     <div id="loadMessages">
       <div id="message-card" v-for="message in allMessages" :key="message.id">
+        <router-link class="one-message" :to="'/oneMessage/' + message.id"
+          >Voir le message</router-link
+        >
         <h2 class="title">{{ message.title }}</h2>
         <div class="content">{{ message.content }}</div>
         <p></p>
@@ -9,10 +12,10 @@
           {{ message.createdAt }}
         </div>
         <div class="commentaire">
-          <newComment />
+          <newComment :id="message.id" />
         </div>
         <div>
-          <deleteMessage />
+          <deleteMessage :id="message.id" />
         </div>
       </div>
     </div>
@@ -20,6 +23,7 @@
 </template>
 
 <script>
+// import oneMessage from "./oneMessage";
 import newComment from "./newComment";
 import deleteMessage from "./deleteMessage";
 import axios from "axios";
@@ -27,19 +31,19 @@ import axios from "axios";
 export default {
   name: "loadMessages",
   components: {
+    // oneMessage,
     newComment,
     deleteMessage,
   },
   data() {
     return {
-        token: "",
-        userId: localStorage.getItem("id"),
-        allMessages: [],
-        id: "",
-        idUsers: "",
-        title: "",
-        content: "",
-        createAt: "",
+      token: "",
+      userId: localStorage.getItem("id"),
+      allMessages: [],
+      idUsers: "",
+      title: "",
+      content: "",
+      createAt: "",
     };
   },
   methods: {
@@ -95,5 +99,10 @@ h2 {
 }
 .commentaire {
   margin-top: 15px;
+}
+.one-message {
+  background-color: black;
+  color: white;
+  padding: 3px;
 }
 </style>

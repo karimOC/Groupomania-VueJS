@@ -20,9 +20,12 @@ import axios from "axios";
 
 export default {
   name: "newComment",
+  props: {
+    id: Number,
+  },
   data() {
     return {
-        comment: "",
+      comment: "",
     };
   },
   methods: {
@@ -32,9 +35,13 @@ export default {
       };
       let token = localStorage.getItem("token");
       axios
-        .post("http://localhost:3000/api/messages/1/comment/", data, {
-          headers: { Authorization: "Bearer " + token },
-        })
+        .post(
+          "http://localhost:3000/api/messages/" + this.id + "/comment/",
+          data,
+          {
+            headers: { Authorization: "Bearer " + token },
+          }
+        )
         .then((res) => {
           console.log(res);
           document.location.reload();
