@@ -25,6 +25,7 @@ exports.createMessage = (req, res, next) => {
 
 exports.getAllMessage = (req, res, next) => {
   models.Message.findAll({
+    order: [["updatedAt", "DESC"]],
     attributes: [
       "id",
       "idUsers",
@@ -89,7 +90,7 @@ exports.deleteMessage = (req, res, next) => {
           .catch((error) => {
             res.status(400).json({
               error: error,
-              message: "Le message n'a pas pu être supprimé"
+              message: "Le message n'a pas pu être supprimé",
             });
           });
       }

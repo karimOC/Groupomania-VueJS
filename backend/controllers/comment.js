@@ -26,6 +26,7 @@ exports.getAllComment = (req, res, next) => {
     where: {
       idMessages: req.params.id,
     },
+    order: [["updatedAt", "DESC"]],
   })
     .then((comments) => {
       res.status(200).json(comments);

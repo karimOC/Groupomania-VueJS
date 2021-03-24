@@ -29,6 +29,15 @@
     <button class="deletebtn" type="submit" @click.prevent="deleteProfile">
       Supprimer mon compte
     </button>
+    <h4>Tout mes messages</h4>
+    <div
+      class="my-message"
+      v-for="myMessage in messagesProfile"
+      :key="myMessage.id"
+    >
+      <p>{{ myMessage.title }}</p>
+      <p>{{ myMessage.content }}</p>
+    </div>
   </div>
 </template>
 
@@ -40,13 +49,14 @@ export default {
   name: "profile",
   data() {
     return {
-        token: "",
-        userId: "",
-        dataProfile: [],
-        id: "",
-        email: "",
-        name: "",
-        firstname: "",
+      token: "",
+      userId: "",
+      dataProfile: [],
+      messagesProfile: [],
+      id: "",
+      email: "",
+      name: "",
+      firstname: "",
     };
   },
   methods: {
@@ -65,6 +75,21 @@ export default {
           console.log({ error });
         });
     },
+    loadMessagesProfile() {
+      let token = localStorage.getItem("token");
+      let userId = localStorage.getItem("id");
+      axios
+        .get("http://localhost:3000/api/auth/profile/" + userId + "/messages", {
+          headers: { Authorization: "Bearer " + token },
+        })
+        .then((res) => {
+          this.messagesProfile = res.data;
+          console.log(this.messagesProfile);
+        })
+        .catch((error) => {
+          console.log({ error });
+        });
+    },
     updateProfile() {
       let token = localStorage.getItem("token");
       let userId = localStorage.getItem("id");
@@ -78,6 +103,7 @@ export default {
         })
         .then(() => {
           alert("Votre profil a bien été mis à jour !");
+          document.location.reload();
         })
         .catch((error) => {
           console.log({ error });
@@ -101,6 +127,7 @@ export default {
   },
   mounted() {
     this.loadProfile();
+    this.loadMessagesProfile();
   },
 };
 </script>
@@ -115,5 +142,9 @@ input {
 .deletebtn {
   background-color: rgb(255, 80, 80);
   margin-top: 20px;
+  margin-bottom: 100px;
+}
+.my-message {
+  border: solid;
 }
 </style>

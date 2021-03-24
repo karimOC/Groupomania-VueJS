@@ -2,9 +2,6 @@
   <div>
     <div id="loadMessages">
       <div id="message-card" v-for="message in allMessages" :key="message.id">
-        <router-link class="one-message" :to="'/oneMessage/' + message.id"
-          >Voir le message</router-link
-        >
         <h2 class="title">{{ message.title }}</h2>
         <div class="content">{{ message.content }}</div>
         <p></p>
@@ -15,6 +12,9 @@
           <newComment :id="message.id" />
         </div>
         <div>
+          <router-link class="one-message" :to="'/oneMessage/' + message.id"
+            >Voir le message</router-link
+          >
           <deleteMessage :id="message.id" />
         </div>
       </div>

@@ -44,8 +44,7 @@ export default {
         )
         .then((res) => {
           console.log(res);
-          document.location.reload();
-          this.$router.push("/feed");
+          this.$router.push("/oneMessage/" + this.id);
         })
         .catch((error) => {
           console.log({ error });

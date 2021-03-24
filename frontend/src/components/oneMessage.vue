@@ -24,6 +24,7 @@ export default {
       token: "",
       id: this.$route.params.id,
       allComments: [],
+      oneMessage: [],
       idUsers: "",
       idMessages: "",
       comments: "",
@@ -59,6 +60,8 @@ export default {
   flex-direction: column;
 }
 #comment-card {
+  background-color: black;
+  color: white;
   width: 50%;
   border: solid 2px;
   margin-bottom: 15px;
