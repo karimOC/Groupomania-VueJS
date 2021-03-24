@@ -6,9 +6,9 @@
         <div class="content">{{ comment.comment }}</div>
         <p></p>
         <div class="createdAt">
-          {{ comment.createdAt }}
+          {{ moment(comment.createdAt).fromNow() }}
         </div>
-        <div v-if="comment.idUsers === userId">
+        <div v-if="comment.idUsers == userId">
           <deleteComment :idComm="comment.id" />
         </div>
       </div>
@@ -18,6 +18,7 @@
 
 
 <script>
+let moment = require("moment");
 import deleteComment from "./deleteComment";
 import axios from "axios";
 
@@ -28,6 +29,7 @@ export default {
   },
   data() {
     return {
+      moment: moment,
       token: "",
       id: this.$route.params.id,
       userId: localStorage.getItem("id"),
@@ -77,7 +79,7 @@ export default {
   font-size: 20px;
 }
 .createdAt {
-  font-size: 11px;
+  font-size: 12px;
   display: flex;
   justify-content: space-between;
 }

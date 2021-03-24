@@ -2,11 +2,11 @@
   <div>
     <div id="loadMessages">
       <div id="message-card" v-for="message in allMessages" :key="message.id">
-        <h2 class="title">{{ message.title }}</h2>
+        <h1 class="title">{{ message.title }}</h1>
         <div class="content">{{ message.content }}</div>
         <p></p>
         <div class="createdAt">
-          {{ message.createdAt }}
+          {{ moment(message.createdAt).fromNow() }}
         </div>
         <div class="commentaire">
           <newComment :id="message.id" />
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+let moment = require("moment");
 import newComment from "./newComment";
 import axios from "axios";
 
@@ -32,6 +33,7 @@ export default {
   },
   data() {
     return {
+      moment: moment,
       token: "",
       userId: localStorage.getItem("id"),
       allMessages: [],
@@ -73,31 +75,35 @@ export default {
   width: 50%;
   border: solid 2px;
   margin-bottom: 15px;
-  padding: 10px;
+  padding-bottom: 15px;
   line-height: normal;
 }
 a {
   text-decoration: none;
   color: black;
 }
-h2 {
-  padding-bottom: 15px;
+.title {
+  background-color: black;
+  color: white;
+}
+h1 {
   border-bottom: solid 1px;
 }
 .content {
   font-size: 20px;
 }
 .createdAt {
-  font-size: 11px;
+  font-size: 12px;
   display: flex;
   justify-content: space-between;
+  border-bottom: dashed 1px;
+  padding: 10px;
 }
 .commentaire {
-  margin-top: 15px;
+  margin: 15px;
 }
 .one-message {
-  background-color: black;
-  color: white;
+  background-color: #fd2b016b;
   padding: 4px;
 }
 </style>
