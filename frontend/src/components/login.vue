@@ -64,6 +64,6 @@ export default {
 input {
   border: solid rgb(143, 143, 143) 1px;
   margin-bottom: 15px;
-  width: 20%;
+  width: 40%;
 }
 </style>

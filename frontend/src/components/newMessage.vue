@@ -60,10 +60,10 @@ export default {
 input {
   border: solid rgb(143, 143, 143) 1px;
   margin-bottom: 5px;
-  width: 30%;
+  width: 40%;
 }
 textarea {
-  width: 30%;
+  width: 40%;
 }
 button {
   margin-bottom: 50px;

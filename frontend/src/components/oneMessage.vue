@@ -8,6 +8,9 @@
         <div class="createdAt">
           {{ comment.createdAt }}
         </div>
+        <div v-if="comment.idUsers === userId">
+          <deleteComment :idComm="comment.id" />
+        </div>
       </div>
     </div>
   </div>
@@ -15,20 +18,22 @@
 
 
 <script>
+import deleteComment from "./deleteComment";
 import axios from "axios";
 
 export default {
   name: "oneMessage",
+  components: {
+    deleteComment,
+  },
   data() {
     return {
       token: "",
       id: this.$route.params.id,
+      userId: localStorage.getItem("id"),
       allComments: [],
-      oneMessage: [],
-      idUsers: "",
-      idMessages: "",
-      comments: "",
-      createAt: "",
+      iduser: "",
+      isUser: false,
     };
   },
   methods: {
@@ -62,6 +67,7 @@ export default {
 #comment-card {
   background-color: black;
   color: white;
+  font-size: 20px;
   width: 50%;
   border: solid 2px;
   margin-bottom: 15px;
