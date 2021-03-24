@@ -15,7 +15,6 @@
           <router-link class="one-message" :to="'/oneMessage/' + message.id"
             >Voir le message</router-link
           >
-          <deleteMessage :id="message.id" />
         </div>
       </div>
     </div>
@@ -24,14 +23,12 @@
 
 <script>
 import newComment from "./newComment";
-import deleteMessage from "./deleteMessage";
 import axios from "axios";
 
 export default {
   name: "loadMessages",
   components: {
     newComment,
-    deleteMessage,
   },
   data() {
     return {

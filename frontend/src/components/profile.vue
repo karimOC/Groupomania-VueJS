@@ -35,25 +35,32 @@
       v-for="myMessage in messagesProfile"
       :key="myMessage.id"
     >
-      <p>{{ myMessage.title }}</p>
+      <h3>{{ myMessage.title }}</h3>
       <p>{{ myMessage.content }}</p>
+      <deleteMessage :id="myMessage.id" />
     </div>
   </div>
 </template>
 
 
 <script>
+import deleteMessage from "./deleteMessage";
 import axios from "axios";
 
 export default {
   name: "profile",
+  components: {
+    deleteMessage,
+  },
+  props: {
+    id: Number,
+  },
   data() {
     return {
       token: "",
       userId: "",
       dataProfile: [],
       messagesProfile: [],
-      id: "",
       email: "",
       name: "",
       firstname: "",
@@ -142,9 +149,11 @@ input {
 .deletebtn {
   background-color: rgb(255, 80, 80);
   margin-top: 20px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 .my-message {
   border: solid;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 </style>
