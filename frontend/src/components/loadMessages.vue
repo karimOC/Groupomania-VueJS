@@ -8,12 +8,9 @@
         <div class="createdAt">
           <i>{{ moment(message.createdAt).fromNow() }}</i>
         </div>
-        <div class="commentaire">
-          <newComment :id="message.id" />
-        </div>
         <div>
           <router-link class="one-message" :to="'/oneMessage/' + message.id"
-            >Voir le message</router-link
+            >Voir les commentaires</router-link
           >
         </div>
       </div>
@@ -23,14 +20,10 @@
 
 <script>
 let moment = require("moment");
-import newComment from "./newComment";
 import axios from "axios";
 
 export default {
   name: "loadMessages",
-  components: {
-    newComment,
-  },
   data() {
     return {
       moment: moment,
@@ -52,7 +45,6 @@ export default {
         })
         .then((res) => {
           this.allMessages = res.data;
-          console.log(this.allMessages);
         })
         .catch((error) => {
           console.log({ error });
@@ -97,9 +89,7 @@ h1 {
   justify-content: space-between;
   border-bottom: dashed 1px;
   padding: 10px;
-}
-.commentaire {
-  margin: 15px;
+  margin-bottom: 15px;
 }
 .one-message {
   background-color: black;

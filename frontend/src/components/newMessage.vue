@@ -48,8 +48,7 @@ export default {
         .post("http://localhost:3000/api/messages/", data, {
           headers: { Authorization: "Bearer " + token },
         })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           alert("Votre message a bien été envoyé !");
           document.location.reload();
           this.$router.push("/feed");

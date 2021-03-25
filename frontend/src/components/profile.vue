@@ -80,7 +80,6 @@ export default {
         })
         .then((res) => {
           this.dataProfile = res.data;
-          console.log(this.dataProfile);
         })
         .catch((error) => {
           console.log({ error });
@@ -95,7 +94,6 @@ export default {
         })
         .then((res) => {
           this.messagesProfile = res.data;
-          console.log(this.messagesProfile);
         })
         .catch((error) => {
           console.log({ error });

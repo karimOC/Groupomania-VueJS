@@ -49,6 +49,7 @@ export default {
         .then((res) => {
           console.log(res);
           this.$router.push("/oneMessage/" + this.id);
+          document.location.reload();
         })
         .catch((error) => {
           this.error = error.response.data;

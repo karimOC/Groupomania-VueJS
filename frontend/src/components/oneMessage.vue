@@ -13,12 +13,16 @@
         </div>
       </div>
     </div>
+    <div class="commentaire">
+      <newComment :id="id" />
+    </div>
   </div>
 </template>
 
 
 <script>
 let moment = require("moment");
+import newComment from "./newComment";
 import deleteComment from "./deleteComment";
 import axios from "axios";
 
@@ -26,6 +30,7 @@ export default {
   name: "oneMessage",
   components: {
     deleteComment,
+    newComment,
   },
   data() {
     return {
@@ -34,8 +39,6 @@ export default {
       id: this.$route.params.id,
       userId: localStorage.getItem("id"),
       allComments: [],
-      iduser: "",
-      isUser: false,
     };
   },
   methods: {
@@ -47,7 +50,6 @@ export default {
         })
         .then((res) => {
           this.allComments = res.data;
-          console.log(this.allComments);
         })
         .catch((error) => {
           console.log({ error });
@@ -82,5 +84,8 @@ export default {
   font-size: 12px;
   display: flex;
   justify-content: space-between;
+}
+.commentaire {
+  margin: 15px;
 }
 </style>
