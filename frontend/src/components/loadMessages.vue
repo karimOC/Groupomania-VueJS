@@ -6,7 +6,7 @@
         <div class="content">{{ message.content }}</div>
         <p></p>
         <div class="createdAt">
-          {{ moment(message.createdAt).fromNow() }}
+          <i>{{ moment(message.createdAt).fromNow() }}</i>
         </div>
         <div class="commentaire">
           <newComment :id="message.id" />
@@ -72,9 +72,9 @@ export default {
   flex-direction: column;
 }
 #message-card {
-  width: 50%;
+  width: 90%;
   border: solid 2px;
-  margin-bottom: 15px;
+  margin: 15px;
   padding-bottom: 15px;
   line-height: normal;
 }
@@ -83,8 +83,7 @@ a {
   color: black;
 }
 .title {
-  background-color: black;
-  color: white;
+  padding-bottom: 15px;
 }
 h1 {
   border-bottom: solid 1px;
@@ -103,7 +102,8 @@ h1 {
   margin: 15px;
 }
 .one-message {
-  background-color: #fd2b016b;
+  background-color: black;
+  color: white;
   padding: 4px;
 }
 </style>

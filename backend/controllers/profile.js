@@ -23,6 +23,12 @@ exports.modifyProfile = (req, res, next) => {
   const userId = decodedToken.userId;
   const isAdmin = decodedToken.isAdmin;
 
+  if (req.body.name == "" || req.body.firstname == "") {
+    return res
+      .status(400)
+      .json({ error: "Merci de remplir tous les champs !" });
+  }
+
   models.User.findOne({
     where: { id: req.params.id },
   }).then((user) => {

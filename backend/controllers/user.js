@@ -7,20 +7,20 @@ const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!.@#$%^&*])(?=.{
 
 exports.signup = (req, res, next) => {
   if (
-    req.body.email == null ||
-    req.body.name == null ||
-    req.body.firstname == null ||
-    req.body.password == null
+    req.body.email == "" ||
+    req.body.name == "" ||
+    req.body.firstname == "" ||
+    req.body.password == ""
   ) {
     return res
       .status(400)
       .json({ error: "Merci de remplir tous les champs !" });
   }
   if (!EMAIL_REGEX.test(req.body.email)) {
-    return res.status(406).json({ error: "Email incorrect !" });
+    return res.status(400).json({ error: "Email incorrect !" });
   }
   if (!PASSWORD_REGEX.test(req.body.password)) {
-    return res.status(406).json({
+    return res.status(401).json({
       error:
         "Minimum: 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère (!.@#$%^&*)",
     });
@@ -62,7 +62,7 @@ exports.login = (req, res, next) => {
   })
     .then((user) => {
       if (!user) {
-        return res.status(401).json({ error: "Utilisateur non trouvé !" });
+        return res.status(404).json({ error: "Utilisateur introuvable !" });
       }
       bcrypt
         .compare(req.body.password, user.password)

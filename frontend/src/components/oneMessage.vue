@@ -6,7 +6,7 @@
         <div class="content">{{ comment.comment }}</div>
         <p></p>
         <div class="createdAt">
-          {{ moment(comment.createdAt).fromNow() }}
+          <i>{{ moment(comment.createdAt).fromNow() }}</i>
         </div>
         <div v-if="comment.idUsers == userId">
           <deleteComment :idComm="comment.id" />
@@ -70,7 +70,7 @@ export default {
   background-color: black;
   color: white;
   font-size: 20px;
-  width: 50%;
+  width: 90%;
   border: solid 2px;
   margin-bottom: 15px;
   padding: 10px;

@@ -6,7 +6,7 @@ exports.createComment = (req, res, next) => {
   const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
   const userId = decodedToken.userId;
 
-  if (req.body.comment.length < 0) {
+  if (req.body.comment === "") {
     return res
       .status(400)
       .json({ error: "Merci de remplir le champ commentaire." });

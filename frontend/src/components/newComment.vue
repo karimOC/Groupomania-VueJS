@@ -6,12 +6,15 @@
         <input
           type="text"
           id="comment"
-          placeholder="Commentaire !"
+          placeholder="Commentaire"
           v-model="comment"
         />
       </div>
       <button type="submit" @click.prevent="buttonNewComment">Envoyer</button>
     </form>
+    <div class="error" v-if="error">
+      {{ error.error }}
+    </div>
   </div>
 </template>
 
@@ -26,6 +29,7 @@ export default {
   data() {
     return {
       comment: "",
+      error: "",
     };
   },
   methods: {
@@ -47,7 +51,7 @@ export default {
           this.$router.push("/oneMessage/" + this.id);
         })
         .catch((error) => {
-          console.log({ error });
+          this.error = error.response.data;
         });
     },
   },
@@ -62,5 +66,11 @@ input {
 }
 button {
   margin-bottom: 10px;
+}
+.error {
+  font-size: 11px;
+  background-color: rgb(231, 185, 185);
+  color: rgb(53, 21, 21);
+  padding: 10px;
 }
 </style>

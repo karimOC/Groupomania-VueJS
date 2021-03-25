@@ -26,6 +26,9 @@
       </div>
       <button type="submit" @click.prevent="updateProfile">Modifier</button>
     </form>
+    <div class="error" v-if="error">
+      {{ error.error }}
+    </div>
     <button class="deletebtn" type="submit" @click.prevent="deleteProfile">
       Supprimer mon compte
     </button>
@@ -58,6 +61,7 @@ export default {
   data() {
     return {
       token: "",
+      error: "",
       userId: "",
       dataProfile: [],
       messagesProfile: [],
@@ -113,7 +117,7 @@ export default {
           document.location.reload();
         })
         .catch((error) => {
-          console.log({ error });
+          this.error = error.response.data;
         });
     },
     deleteProfile() {
@@ -155,5 +159,12 @@ input {
   border: solid;
   margin-bottom: 20px;
   padding-bottom: 20px;
+}
+.error {
+  font-size: 13px;
+  background-color: rgb(231, 185, 185);
+  color: rgb(53, 21, 21);
+  margin-top: 30px;
+  padding: 10px;
 }
 </style>

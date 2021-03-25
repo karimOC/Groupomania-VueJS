@@ -12,10 +12,15 @@
           type="text"
           id="content"
           placeholder="Votre message !"
+          rows="5"
+          cols="33"
           v-model="content"
         />
       </div>
       <button type="submit" @click.prevent="buttonNewMessage">Envoyer</button>
+      <div class="error" v-if="error">
+        {{ error.error }}
+      </div>
     </form>
   </div>
 </template>
@@ -29,6 +34,7 @@ export default {
     return {
       title: "",
       content: "",
+      error: "",
     };
   },
   methods: {
@@ -49,7 +55,7 @@ export default {
           this.$router.push("/feed");
         })
         .catch((error) => {
-          console.log({ error });
+          this.error = error.response.data;
         });
     },
   },
@@ -60,12 +66,16 @@ export default {
 input {
   border: solid rgb(143, 143, 143) 1px;
   margin-bottom: 5px;
-  width: 40%;
+  width: 60%;
 }
 textarea {
-  width: 40%;
+  width: 60%;
 }
-button {
-  margin-bottom: 50px;
+.error {
+  font-size: 13px;
+  background-color: rgb(231, 185, 185);
+  color: rgb(53, 21, 21);
+  margin: 20px;
+  padding: 10px;
 }
 </style>

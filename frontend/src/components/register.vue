@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-    <h2>Inscription</h2>
+    <h1>Inscription</h1>
     <form method="post" @submit.prevent="buttonSignup">
       <div>
         <label for="email"></label>
@@ -35,6 +35,9 @@
       </div>
       <button type="submit" @click.prevent="buttonSignup">S'inscrire</button>
     </form>
+    <div class="error" v-if="error">
+      {{ error.error }}
+    </div>
   </div>
 </template>
 
@@ -46,10 +49,11 @@ export default {
   name: "register",
   data() {
     return {
-        email: "",
-        name: "",
-        firstname: "",
-        password: "",
+      email: "",
+      name: "",
+      firstname: "",
+      password: "",
+      error: "",
     };
   },
   methods: {
@@ -67,7 +71,7 @@ export default {
           this.$router.push("/login");
         })
         .catch((error) => {
-          console.log({ error });
+          this.error = error.response.data;
         });
     },
   },
@@ -83,6 +87,13 @@ export default {
 input {
   border: solid rgb(143, 143, 143) 1px;
   margin-bottom: 15px;
-  width: 20%;
+  width: 60%;
+}
+.error {
+  font-size: 13px;
+  background-color: rgb(231, 185, 185);
+  color: rgb(53, 21, 21);
+  margin-top: 30px;
+  padding: 10px;
 }
 </style>
