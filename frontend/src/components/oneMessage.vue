@@ -11,6 +11,9 @@
         <div v-if="comment.idUsers == userId">
           <deleteComment :idComm="comment.id" />
         </div>
+        <div v-if="isAdmin == true">
+          <deleteComment :idComm="comment.id" />
+        </div>
       </div>
     </div>
     <div class="commentaire">
@@ -24,6 +27,8 @@
 let moment = require("moment");
 import newComment from "./newComment";
 import deleteComment from "./deleteComment";
+let jwt = require("jsonwebtoken");
+
 import axios from "axios";
 
 export default {
@@ -36,6 +41,7 @@ export default {
     return {
       moment: moment,
       token: "",
+      isAdmin: "",
       id: this.$route.params.id,
       userId: localStorage.getItem("id"),
       allComments: [],
@@ -44,11 +50,14 @@ export default {
   methods: {
     loadComments() {
       let token = localStorage.getItem("token");
+      let decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
       axios
         .get("http://localhost:3000/api/messages/" + this.id + "/comments/", {
           headers: { Authorization: "Bearer " + token },
         })
         .then((res) => {
+          this.allMessages = res.data;
+          this.isAdmin = decodedToken.isAdmin;
           this.allComments = res.data;
         })
         .catch((error) => {

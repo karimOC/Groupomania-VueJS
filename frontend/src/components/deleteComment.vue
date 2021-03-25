@@ -16,6 +16,7 @@ export default {
   data() {
     return {
       token: "",
+      isAdmin: "",
       id: this.$route.params.id,
     };
   },

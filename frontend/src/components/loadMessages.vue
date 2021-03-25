@@ -13,22 +13,32 @@
             >Voir les commentaires</router-link
           >
         </div>
+        <div class="adminDelete" v-if="isAdmin == true">
+          <deleteMessage :id="message.id" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import deleteMessage from "./deleteMessage";
 let moment = require("moment");
+let jwt = require("jsonwebtoken");
+
 import axios from "axios";
 
 export default {
   name: "loadMessages",
+  components: {
+    deleteMessage,
+  },
   data() {
     return {
       moment: moment,
       token: "",
       userId: localStorage.getItem("id"),
+      isAdmin: "",
       allMessages: [],
       idUsers: "",
       title: "",
@@ -39,12 +49,14 @@ export default {
   methods: {
     loadFeed() {
       let token = localStorage.getItem("token");
+      let decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
       axios
         .get("http://localhost:3000/api/messages/", {
           headers: { Authorization: "Bearer " + token },
         })
         .then((res) => {
           this.allMessages = res.data;
+          this.isAdmin = decodedToken.isAdmin;
         })
         .catch((error) => {
           console.log({ error });
@@ -95,5 +107,8 @@ h1 {
   background-color: black;
   color: white;
   padding: 4px;
+}
+.adminDelete {
+  margin: 10px;
 }
 </style>

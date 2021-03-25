@@ -33,14 +33,16 @@
       Supprimer mon compte
     </button>
     <h4>Tout mes messages</h4>
-    <div
-      class="my-message"
-      v-for="myMessage in messagesProfile"
-      :key="myMessage.id"
-    >
-      <h3>{{ myMessage.title }}</h3>
-      <p>{{ myMessage.content }}</p>
-      <deleteMessage :id="myMessage.id" />
+    <div class="my-messages">
+      <div
+        class="my-message"
+        v-for="myMessage in messagesProfile"
+        :key="myMessage.id"
+      >
+        <h3>{{ myMessage.title }}</h3>
+        <p>{{ myMessage.content }}</p>
+        <deleteMessage :id="myMessage.id" />
+      </div>
     </div>
   </div>
 </template>
@@ -153,10 +155,19 @@ input {
   margin-top: 20px;
   margin-bottom: 50px;
 }
-.my-message {
-  border: solid;
+.my-messages {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   margin-bottom: 20px;
   padding-bottom: 20px;
+}
+.my-message {
+  border: solid;
+  width: 40%;
+  margin: 15px;
+  padding-bottom: 15px;
+  font-size: 12px;
 }
 .error {
   font-size: 13px;
