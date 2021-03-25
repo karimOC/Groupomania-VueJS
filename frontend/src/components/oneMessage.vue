@@ -7,6 +7,7 @@
         <p></p>
         <div class="createdAt">
           <i>{{ moment(comment.createdAt).fromNow() }}</i>
+          <i>{{ comment.User.name }} {{ comment.User.firstname }}</i>
         </div>
         <div v-if="comment.idUsers == userId">
           <deleteComment :idComm="comment.id" />

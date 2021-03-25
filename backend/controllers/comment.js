@@ -27,6 +27,12 @@ exports.getAllComment = (req, res, next) => {
       idMessages: req.params.id,
     },
     order: [["updatedAt", "DESC"]],
+    include: [
+      {
+        model: models.User,
+        attributes: ["name", "firstname"],
+      },
+    ],
   })
     .then((comments) => {
       res.status(200).json(comments);

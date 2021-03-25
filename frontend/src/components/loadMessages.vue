@@ -7,6 +7,7 @@
         <p></p>
         <div class="createdAt">
           <i>{{ moment(message.createdAt).fromNow() }}</i>
+          <i>{{ message.User.name }} {{ message.User.firstname }}</i>
         </div>
         <div>
           <router-link class="one-message" :to="'/oneMessage/' + message.id"
