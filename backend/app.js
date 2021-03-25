@@ -6,6 +6,7 @@ const commentRoutes = require("./routes/comment");
 const userRoutes = require("./routes/user");
 const profileRoutes = require("./routes/profile");
 
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(

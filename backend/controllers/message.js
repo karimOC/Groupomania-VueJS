@@ -1,6 +1,7 @@
 const models = require("../models");
 const jwt = require("jsonwebtoken");
 
+
 exports.createMessage = (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
@@ -17,7 +18,7 @@ exports.createMessage = (req, res, next) => {
     idUsers: userId,
     title: title,
     content: content,
-    image: req.body.image,
+    // image: req.body.image,
   })
     .then(() => res.status(201).json({ message: "Message enregistré !" }))
     .catch((error) => res.status(400).json({ error }));

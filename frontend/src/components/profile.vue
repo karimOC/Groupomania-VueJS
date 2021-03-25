@@ -164,9 +164,8 @@ input {
 }
 .my-message {
   border: solid;
-  width: 40%;
   margin: 15px;
-  padding-bottom: 15px;
+  padding: 15px;
   font-size: 12px;
 }
 .error {
