@@ -40,6 +40,11 @@
         :key="myMessage.id"
       >
         <h3>{{ myMessage.title }}</h3>
+        <img
+          :src="myMessage.image"
+          :alt="myMessage.image"
+          v-if="myMessage.image != null"
+        /><br />
         <p>{{ myMessage.content }}</p>
         <deleteMessage :id="myMessage.id" />
       </div>
@@ -161,6 +166,10 @@ input {
   flex-wrap: wrap;
   margin-bottom: 20px;
   padding-bottom: 20px;
+}
+img {
+  width: 90px;
+  height: 90px;
 }
 .my-message {
   border: solid;

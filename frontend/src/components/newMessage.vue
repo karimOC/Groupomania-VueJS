@@ -17,6 +17,10 @@
           v-model="content"
         />
       </div>
+      <div>
+        <label for="File">(Faclultatif)</label><br />
+        <input type="file" ref="file" @change="selectFile()" />
+      </div>
       <button type="submit" @click.prevent="buttonNewMessage">Envoyer</button>
       <div class="error" v-if="error">
         {{ error.error }}
@@ -34,16 +38,22 @@ export default {
     return {
       title: "",
       content: "",
+      file: null,
       error: "",
     };
   },
   methods: {
     buttonNewMessage() {
-      const data = {
-        title: this.title,
-        content: this.content,
-      };
       let token = localStorage.getItem("token");
+      const data = new FormData();
+      if (this.file !== null) {
+        data.append("title", this.title);
+        data.append("content", this.content);
+        data.append("image", this.file, this.file.name);
+      } else {
+        data.append("title", this.title);
+        data.append("content", this.content);
+      }
       axios
         .post("http://localhost:3000/api/messages/", data, {
           headers: { Authorization: "Bearer " + token },
@@ -57,6 +67,10 @@ export default {
           this.error = error.response.data;
         });
     },
+    selectFile() {
+      this.file = this.$refs.file.files[0];
+      console.log(this.file);
+    },
   },
 };
 </script>
@@ -69,6 +83,12 @@ input {
 }
 textarea {
   width: 60%;
+}
+label {
+  font-size: 11px;
+}
+button {
+  margin-top: 10px;
 }
 .error {
   font-size: 13px;

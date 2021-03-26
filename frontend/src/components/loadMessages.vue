@@ -3,8 +3,14 @@
     <div id="loadMessages">
       <div id="message-card" v-for="message in allMessages" :key="message.id">
         <h1 class="title">{{ message.title }}</h1>
-        <div class="content">{{ message.content }}</div>
-        <p></p>
+        <div class="content">
+          <img
+            :src="message.image"
+            :alt="message.image"
+            v-if="message.image != null"
+          /><br />
+          {{ message.content }}
+        </div>
         <div class="createdAt">
           <i>{{ moment(message.createdAt).fromNow() }}</i>
           <i>{{ message.User.name }} {{ message.User.firstname }}</i>
@@ -95,11 +101,17 @@ h1 {
 }
 .content {
   font-size: 20px;
+  padding-bottom: 15px;
+}
+img {
+  width: 90%;
+  height: 90%;
 }
 .createdAt {
   font-size: 12px;
   display: flex;
   justify-content: space-between;
+  border-top: dashed 1px;
   border-bottom: dashed 1px;
   padding: 10px;
   margin-bottom: 15px;
