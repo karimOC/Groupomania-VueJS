@@ -43,6 +43,9 @@ Ensuite cliquez sur START
 **BACKEND**
 
 Installer mysql dans le backend => npm i mysql
+(par default le User=root et il n'y a pas de mot de passe)
+Pour modifier le mot de passe faites la commande:
+mysqladmin -u -root password VOTRE MOT DE PASSE
 
 À la racine du dossier backend, faites un npm install
 
