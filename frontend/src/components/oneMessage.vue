@@ -57,7 +57,6 @@ export default {
           headers: { Authorization: "Bearer " + token },
         })
         .then((res) => {
-          this.allMessages = res.data;
           this.isAdmin = decodedToken.isAdmin;
           this.allComments = res.data;
         })

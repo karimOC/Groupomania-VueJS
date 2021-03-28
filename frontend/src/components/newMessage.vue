@@ -69,7 +69,6 @@ export default {
     },
     selectFile() {
       this.file = this.$refs.file.files[0];
-      console.log(this.file);
     },
   },
 };
