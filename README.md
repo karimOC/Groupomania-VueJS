@@ -34,8 +34,6 @@ Pour finaliser la base de données, executez dans la racine du dossier backend :
 
 Puis lancez le serveur avec "npm start"
 
-Pour modifier le mot de passe 
-
 Installer le logiciel MAMP
 Dans preférences/ports cliquez sur le ports 80 & 3306
 Ensuite cliquez sur START
