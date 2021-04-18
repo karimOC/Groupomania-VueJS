@@ -14,6 +14,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: black;
+  background-color: #f1f1f1	;
 }
 
 #nav {
