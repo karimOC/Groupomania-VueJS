@@ -45,7 +45,8 @@
     }
   }
   a:hover {
-    color: #677084;
+    border-bottom: 2px solid white;
+  
   }
 }
 footer {
