@@ -86,9 +86,19 @@ export default {
   align-items: center;
 }
 input {
-  border: solid rgb(143, 143, 143) 1px;
-  margin-bottom: 15px;
-  width: 60%;
+  border: solid rgb(206, 206, 206) 1px;
+  text-decoration: none;
+  box-shadow: 10px 5px 9px #67708428;
+  margin-bottom: 20px;
+  width: 50%;
+}
+button {
+  background-color: #192a48;
+  color: white;
+  padding: 6px;
+  margin-bottom: 10px;
+  border: none;
+  text-decoration: none;
 }
 .error {
   font-size: 13px;

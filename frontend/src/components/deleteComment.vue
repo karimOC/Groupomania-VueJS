@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button type="submit" @click.prevent="deleteComment">Supprimer</button>
+    <button type="submit" @click.prevent="deleteComment"><i class="fas fa-trash-alt"></i></button>
   </div>
 </template>
 
@@ -49,5 +49,8 @@ export default {
 button {
   background-color: red;
   color: white;
+  border: none;
+  padding: 5px;
+  margin-top: 10px;
 }
 </style>

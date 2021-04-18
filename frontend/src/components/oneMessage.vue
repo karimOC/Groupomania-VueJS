@@ -12,8 +12,8 @@
         <div class="content">
           <i class="user-name"
             >{{ comment.User.name }} {{ comment.User.firstname }}</i
-          >
-          {{ comment.comment }} <br />
+          ><br />
+          <strong>{{ comment.comment }}</strong><br />
           <i class="date">{{ moment(comment.createdAt).fromNow() }}</i>
         </div>
         <div v-if="comment.idUsers == userId">
@@ -88,7 +88,7 @@ export default {
 #comment-card {
   background-color: #c46e78;
   color: white;
-  font-size: 20px;
+  font-size: 15px;
   width: 80%;
   border: solid 2px;
   margin-bottom: 15px;
@@ -97,11 +97,6 @@ export default {
 }
 .user-name {
   font-size: 11px;
-  border: 1px solid white;
-  padding-left: 8px;
-  padding-right: 8px;
-  border-radius: 100%;
-  margin-right: 10px;
 }
 .date {
   font-size: 12px;

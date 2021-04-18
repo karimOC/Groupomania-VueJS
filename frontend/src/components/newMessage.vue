@@ -1,7 +1,7 @@
 <template>
   <div class="feed">
     <form method="post" @submit.prevent="buttonNewMessage">
-      <h2>Envoyer un message</h2>
+      <h2>Envoyer un message <i class="far fa-paper-plane"></i></h2>
       <div>
         <label for="title"></label>
         <input type="title" id="title" placeholder="Titre" v-model="title" />
@@ -18,7 +18,7 @@
         />
       </div>
       <div>
-        <label for="File">(Faclultatif)</label><br />
+        <label for="File">(Facultatif)</label><br />
         <input type="file" ref="file" @change="selectFile()" />
       </div>
       <button type="submit" @click.prevent="buttonNewMessage">Envoyer</button>
@@ -87,11 +87,7 @@ form {
   color: white;
   margin-bottom: 40px;
 }
-input {
-  border: solid rgb(143, 143, 143) 1px;
-  margin-bottom: 5px;
-  width: 80%;
-}
+
 textarea {
   width: 80%;
   margin-bottom: 10px;
@@ -99,9 +95,19 @@ textarea {
 label {
   font-size: 12px;
 }
-button {
-  margin-top: 30px;
+input {
+  border: solid rgb(206, 206, 206) 1px;
+  text-decoration: none;
   margin-bottom: 20px;
+  width: 50%;
+}
+button {
+  background-color: #c46e78;
+  color: white;
+  padding: 6px;
+  margin-bottom: 10px;
+  border: none;
+  text-decoration: none;
 }
 .error {
   font-size: 13px;

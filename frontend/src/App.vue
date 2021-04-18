@@ -1,9 +1,9 @@
 <template>
   <div>
     <router-view />
-    <nav id="nav">
-      <p>© 2021 El Fakih Karim</p>
-    </nav>
+    <footer>
+      <p>Copyright © 2021 Tous droits réservés | El Fakih Karim</p>
+    </footer>
   </div>
 </template>
 
@@ -47,5 +47,15 @@
   a:hover {
     color: #677084;
   }
+}
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #192a48;
+  color: white;
+  height: 60px;
+  padding: 20px;
+  margin-top: 50px;
 }
 </style>

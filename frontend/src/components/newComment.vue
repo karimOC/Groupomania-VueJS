@@ -10,7 +10,9 @@
           v-model="comment"
         />
       </div>
-      <button type="submit" @click.prevent="buttonNewComment">Envoyer</button>
+      <button type="submit" @click.prevent="buttonNewComment">
+        Envoyer <i class="far fa-comments"></i>
+      </button>
     </form>
     <div class="error" v-if="error">
       {{ error.error }}
@@ -61,12 +63,19 @@ export default {
 
 <style scoped>
 input {
-  border: solid rgb(143, 143, 143) 1px;
-  margin-bottom: 5px;
-  width: 90%;
+  border: solid rgb(206, 206, 206) 1px;
+  text-decoration: none;
+  box-shadow: 10px 5px 9px #67708469;
+  margin-bottom: 20px;
+  width: 50%;
 }
 button {
+  background-color: #192a48;
+  color: white;
+  padding: 6px;
   margin-bottom: 10px;
+  border: none;
+  text-decoration: none;
 }
 .error {
   font-size: 11px;
