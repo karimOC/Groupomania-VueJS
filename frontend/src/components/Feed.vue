@@ -1,10 +1,13 @@
 <template>
   <div>
-    <div id="nav">
-      <router-link to="/feed">Accueil </router-link> |
-      <router-link to="/profile"> Profil</router-link> |
-      <a to="/login" v-on:click="Logout()"> Déconnexion</a>
-    </div>
+    <nav id="nav">
+      <img src="../assets/logo.png" alt="logo" />
+      <ul class="links">
+        <li><router-link to="/feed">Accueil</router-link></li>
+        <li><router-link to="/profile"> Profil</router-link></li>
+        <li><a to="/login" v-on:click="Logout()"> Déconnexion</a></li>
+      </ul>
+    </nav>
     <div>
       <newMessage />
     </div>
@@ -27,8 +30,8 @@ export default {
   },
   data() {
     return {
-        token: "",
-        allMessages: [],
+      token: "",
+      allMessages: [],
     };
   },
   methods: {

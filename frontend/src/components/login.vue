@@ -1,5 +1,16 @@
 <template>
   <div class="login">
+    <nav id="nav">
+      <img src="../assets/logo.png" alt="logo" />
+      <ul class="links">
+        <!-- <li><a href="#">Accueil</a></li> -->
+        <li>
+          <a href="#Apropos">
+            <router-link to="/">S'enregistrer</router-link>
+          </a>
+        </li>
+      </ul>
+    </nav>
     <h2>Connection</h2>
     <form method="post" @submit.prevent="buttonLogin">
       <div>

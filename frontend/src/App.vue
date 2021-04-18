@@ -1,6 +1,5 @@
 <template>
   <div>
-    <a href="/"> <img id="logo" src="./assets/logo.png" alt="logo" /></a>
     <router-view />
   </div>
 </template>
@@ -14,20 +13,28 @@
   color: black;
 }
 
-#logo {
-  width: 300px;
-}
-
 #nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #192a48;
+  height: 60px;
   padding: 20px;
+  .links {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+  }
   a {
     font-weight: bold;
-    color: black;
+    color: white;
     text-decoration: none;
 
     &.router-link-exact-active {
-      color: #fd2d01;
+      color: #c46e78;
     }
+  }
+  a:hover {
+    color: #677084;
   }
 }
 </style>

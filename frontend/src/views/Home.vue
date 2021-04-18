@@ -1,6 +1,15 @@
 <template>
-  <div id="nav">
-    <router-link to="/login">Se connecter</router-link>
+  <div>
+    <nav id="nav">
+      <img src="../assets/logo.png" alt="logo" />
+      <ul class="links">
+        <li>
+          <a href="#Apropos">
+            <router-link to="/login">Se connecter</router-link>
+          </a>
+        </li>
+      </ul>
+    </nav>
     <register />
   </div>
 </template>
