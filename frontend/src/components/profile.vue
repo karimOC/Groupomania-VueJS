@@ -1,7 +1,14 @@
 <template>
   <div>
-    <div id="nav"><router-link to="/feed">Retour</router-link></div>
+    <nav id="nav">
+      <ul class="links">
+        <li>
+          <router-link to="/feed">Retour</router-link>
+        </li>
+      </ul>
+    </nav>
     <div>
+    <h2>Profile</h2>
       <p>
         <u>E-mail</u>:
         {{ dataProfile.email }}

@@ -4,9 +4,7 @@
       <img src="../assets/logo.png" alt="logo" />
       <ul class="links">
         <li>
-          <a href="#Apropos">
-            <router-link to="/login">Se connecter</router-link>
-          </a>
+          <router-link to="/login">Se connecter</router-link>
         </li>
       </ul>
     </nav>

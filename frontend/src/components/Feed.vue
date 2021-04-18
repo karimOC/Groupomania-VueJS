@@ -8,6 +8,7 @@
         <li><a to="/login" v-on:click="Logout()"> Déconnexion</a></li>
       </ul>
     </nav>
+    <h2>Feed</h2>
     <div>
       <newMessage />
     </div>

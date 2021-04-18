@@ -21,8 +21,13 @@
   padding: 20px;
   .links {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    // justify-content: space-between;
     list-style: none;
+    // width: 30%;
+  }
+  li {
+    margin-right: 20px;
   }
   a {
     font-weight: bold;

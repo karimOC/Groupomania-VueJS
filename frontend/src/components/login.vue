@@ -3,11 +3,8 @@
     <nav id="nav">
       <img src="../assets/logo.png" alt="logo" />
       <ul class="links">
-        <!-- <li><a href="#">Accueil</a></li> -->
         <li>
-          <a href="#Apropos">
-            <router-link to="/">S'enregistrer</router-link>
-          </a>
+          <router-link to="/">S'enregistrer</router-link>
         </li>
       </ul>
     </nav>
