@@ -1,13 +1,20 @@
 <template>
   <div>
-    <div id="nav"><router-link to="/feed">Retour</router-link></div>
+    <nav id="nav">
+      <ul class="links">
+        <li>
+          <router-link to="/feed">Retour</router-link>
+        </li>
+      </ul>
+    </nav>
     <div id="oneMessage">
       <div id="comment-card" v-for="comment in allComments" :key="comment.id">
-        <div class="content">{{ comment.comment }}</div>
-        <p></p>
-        <div class="createdAt">
-          <i>{{ moment(comment.createdAt).fromNow() }}</i>
-          <i>{{ comment.User.name }} {{ comment.User.firstname }}</i>
+        <div class="content">
+          <i class="user-name"
+            >{{ comment.User.name }} {{ comment.User.firstname }}</i
+          >
+          {{ comment.comment }} <br />
+          <i class="date">{{ moment(comment.createdAt).fromNow() }}</i>
         </div>
         <div v-if="comment.idUsers == userId">
           <deleteComment :idComm="comment.id" />
@@ -74,17 +81,30 @@ export default {
 <style scoped>
 #oneMessage {
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
 }
 #comment-card {
-  background-color: black;
+  background-color: #c46e78;
   color: white;
   font-size: 20px;
-  width: 90%;
+  width: 80%;
   border: solid 2px;
   margin-bottom: 15px;
-  padding: 10px;
+  padding: 15px;
+  text-align: left;
+}
+.user-name {
+  font-size: 11px;
+  border: 1px solid white;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+.date {
+  font-size: 12px;
 }
 .comment {
   font-size: 20px;
@@ -93,6 +113,9 @@ export default {
   font-size: 12px;
   display: flex;
   justify-content: space-between;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-bottom: 15px;
 }
 .commentaire {
   margin: 15px;

@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h4>Envoyer un message</h4>
+  <div class="feed">
     <form method="post" @submit.prevent="buttonNewMessage">
+      <h2>Envoyer un message</h2>
       <div>
         <label for="title"></label>
         <input type="title" id="title" placeholder="Titre" v-model="title" />
@@ -75,19 +75,33 @@ export default {
 </script>
 
 <style scoped>
+.feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+form {
+  background-color: #192a48;
+  width: 50%;
+  padding: 10px;
+  color: white;
+  margin-bottom: 40px;
+}
 input {
   border: solid rgb(143, 143, 143) 1px;
   margin-bottom: 5px;
-  width: 60%;
+  width: 80%;
 }
 textarea {
-  width: 60%;
+  width: 80%;
+  margin-bottom: 10px;
 }
 label {
-  font-size: 11px;
+  font-size: 12px;
 }
 button {
-  margin-top: 10px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 .error {
   font-size: 13px;

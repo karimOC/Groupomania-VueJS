@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div id="loadMessages">
+  <div class="feed">
       <div id="message-card" v-for="message in allMessages" :key="message.id">
         <h1 class="title">{{ message.title }}</h1>
         <div class="content">
@@ -25,7 +24,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -77,33 +75,29 @@ export default {
 </script>
 
 <style scoped>
-#loadMessages {
+.feed {
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
 }
 #message-card {
-  width: 90%;
+  background-color: #192a48;
+  color: white;
+  width: 80%;
+  max-width: 500px;
   border: solid 2px;
   margin: 15px;
-  padding-bottom: 15px;
-  line-height: normal;
 }
 a {
   text-decoration: none;
-  color: black;
-}
-.title {
-  padding-bottom: 15px;
-}
-h1 {
-  border-bottom: solid 1px;
+  color: red;
 }
 .content {
-  font-size: 20px;
+  font-size: 18px;
   padding-bottom: 15px;
 }
 img {
+  max-width: 500px;
   width: 90%;
   height: 90%;
 }
@@ -111,17 +105,18 @@ img {
   font-size: 12px;
   display: flex;
   justify-content: space-between;
-  border-top: dashed 1px;
-  border-bottom: dashed 1px;
-  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
   margin-bottom: 15px;
 }
 .one-message {
-  background-color: black;
+  background-color: #c46e78;
   color: white;
-  padding: 4px;
+  padding: 9px;
+  border-radius: 25px;
+  font-size: 14px;
 }
 .adminDelete {
-  margin: 10px;
+  margin: 30px;
 }
 </style>

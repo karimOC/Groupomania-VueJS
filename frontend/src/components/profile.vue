@@ -172,17 +172,19 @@ input {
   justify-content: center;
   flex-wrap: wrap;
   margin-bottom: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 20px
 }
 img {
   width: 90px;
   height: 90px;
 }
 .my-message {
-  border: solid;
-  margin: 15px;
-  padding: 15px;
+  background-color: #192a48;
+  color: white;
+  width: 20%;
   font-size: 12px;
+  margin: 15px;
+  padding: 10px;
 }
 .error {
   font-size: 13px;

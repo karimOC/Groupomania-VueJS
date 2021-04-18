@@ -1,6 +1,9 @@
 <template>
   <div>
     <router-view />
+    <nav id="nav">
+      <p>© 2021 El Fakih Karim</p>
+    </nav>
   </div>
 </template>
 
@@ -19,6 +22,9 @@
   background-color: #192a48;
   height: 60px;
   padding: 20px;
+  p {
+    color: white;
+  }
   .links {
     display: flex;
     flex-wrap: wrap;
