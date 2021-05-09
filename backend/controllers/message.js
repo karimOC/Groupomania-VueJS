@@ -120,3 +120,78 @@ exports.deleteMessage = (req, res, next) => {
       });
     });
 };
+
+exports.likeDislikeMessage = (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+  const userId = decodedToken.userId;
+  const like = req.body.like;
+
+  if (like === 1) {
+    Sauce.updateOne(
+      { id: messageId },
+      {
+        $push: { usersLiked: userId }, // On ajoute le User a usersLiked dans la table sauce
+        $inc: { likes: +1 },
+      }
+    );
+    models.Message.findOne({
+      where: { id: req.params.id },
+    }).then((message) => {
+      if (message.id === userId || isAdmin === true) {
+        message
+          .update({
+            name: req.body.name,
+            firstname: req.body.firstname,
+          })
+          .then(() => res.status(200).json({ message: "Profile modifié !" }))
+          .catch((error) =>
+            res
+              .status(400)
+              .json({ error: "Impossible de mettre à jour votre profile !" })
+          );
+      }
+    });
+  }
+  // if (like === -1) {
+  //   Sauce.updateOne(
+  //     { _id: sauceId },
+  //     {
+  //       $push: { usersDisliked: user }, // On l'ajoute a usersDisliked dans la table sauce
+  //       $inc: { dislikes: +1 },
+  //     }
+  //   )
+  //     .then(() => {
+  //       res.status(200).json({ message: "Dislike ajouté !" });
+  //     })
+  //     .catch((error) => res.status(400).json({ error }));
+  // }
+  // if (like === 0) {
+  //   Sauce.findOne({ _id: sauceId })
+  //     .then((sauce) => {
+  //       if (sauce.usersLiked.includes(user)) {
+  //         Sauce.updateOne(
+  //           { _id: sauceId },
+  //           {
+  //             $pull: { usersLiked: user }, // On le retire de usersLiked dans la table sauce
+  //             $inc: { likes: -1 },
+  //           }
+  //         )
+  //           .then(() => res.status(200).json({ message: "Like retiré !" }))
+  //           .catch((error) => res.status(400).json({ error }));
+  //       }
+  //       if (sauce.usersDisliked.includes(user)) {
+  //         Sauce.updateOne(
+  //           { _id: sauceId },
+  //           {
+  //             $pull: { usersDisliked: user }, // On le retire de usersDisliked dans la table sauce
+  //             $inc: { dislikes: -1 },
+  //           }
+  //         )
+  //           .then(() => res.status(200).json({ message: "Dislike retiré !" }))
+  //           .catch((error) => res.status(400).json({ error }));
+  //       }
+  //     })
+  //     .catch((error) => res.status(404).json({ error }));
+  // }
+};

@@ -66,6 +66,7 @@ export default {
         .then((res) => {
           this.isAdmin = decodedToken.isAdmin;
           this.allComments = res.data;
+          console.log(this.allComments)
         })
         .catch((error) => {
           console.log({ error });

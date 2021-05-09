@@ -21,8 +21,16 @@ exports.createComment = (req, res, next) => {
     .catch((error) => res.status(500).json(error));
 };
 
-exports.getAllComment = (req, res, next) => {
+exports.getAllComments = (req, res, next) => {
   models.Comment.findAll({
+    attributes: [
+      "id",
+      "idUsers",
+      "idMessages",
+      "comment",
+      "createdAt",
+      "updatedAt",
+    ],
     where: {
       idMessages: req.params.id,
     },

@@ -1,29 +1,29 @@
 <template>
   <div class="feed">
-      <div id="message-card" v-for="message in allMessages" :key="message.id">
-        <h1 class="title">{{ message.title }}</h1>
-        <div class="content">
-          <img
-            :src="message.image"
-            :alt="message.image"
-            v-if="message.image != null"
-          /><br />
-          {{ message.content }}
-        </div>
-        <div class="createdAt">
-          <i>{{ moment(message.createdAt).fromNow() }}</i>
-          <i>{{ message.User.name }} {{ message.User.firstname }}</i>
-        </div>
-        <div>
-          <router-link class="one-message" :to="'/oneMessage/' + message.id"
-            >Voir les commentaires</router-link
-          >
-        </div>
-        <div class="adminDelete" v-if="isAdmin == true">
-          <deleteMessage :id="message.id" />
-        </div>
+    <div id="message-card" v-for="message in allMessages" :key="message.id">
+      <h1 class="title">{{ message.title }}</h1>
+      <div class="content">
+        <img
+          :src="message.image"
+          :alt="message.image"
+          v-if="message.image != null"
+        /><br />
+        {{ message.content }}
+      </div>
+      <div class="createdAt">
+        <i>{{ moment(message.createdAt).fromNow() }}</i>
+        <i>{{ message.User.name }} {{ message.User.firstname }}</i>
+      </div>
+      <div>
+        <router-link class="one-message" :to="'/oneMessage/' + message.id"
+          >Voir les commentaires</router-link
+        >
+      </div>
+      <div class="adminDelete" v-if="isAdmin == true">
+        <deleteMessage :id="message.id" />
       </div>
     </div>
+  </div>
 </template>
 
 <script>
