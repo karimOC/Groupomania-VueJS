@@ -2,7 +2,7 @@
   <div>
     <router-view />
     <footer>
-      <p>Copyright © 2021 Tous droits réservés | El Fakih Karim</p>
+      <p>Copyright © 2021 Tous droits réservés</p>
     </footer>
   </div>
 </template>

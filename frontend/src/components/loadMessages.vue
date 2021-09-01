@@ -8,11 +8,12 @@
           :alt="message.image"
           v-if="message.image != null"
         /><br />
-        {{ message.content }}
-      </div>
-      <div class="createdAt">
-        <i>{{ moment(message.createdAt).fromNow() }}</i>
-        <i>{{ message.User.name }} {{ message.User.firstname }}</i>
+        {{ message.content }}<br />
+        <div class="createdAt">
+          <i>{{ moment(message.createdAt).fromNow() }}</i>
+          <i>{{ message.User.name }} {{ message.User.firstname }}</i>
+        </div>
+        <div class="like"><like :idMess="message.id" />{{ message.like }}</div>
       </div>
       <div>
         <router-link class="one-message" :to="'/oneMessage/' + message.id"
@@ -28,6 +29,7 @@
 
 <script>
 import deleteMessage from "./deleteMessage";
+import like from "./like";
 let moment = require("moment");
 let jwt = require("jsonwebtoken");
 
@@ -37,6 +39,7 @@ export default {
   name: "loadMessages",
   components: {
     deleteMessage,
+    like,
   },
   data() {
     return {
@@ -118,5 +121,10 @@ img {
 }
 .adminDelete {
   margin: 30px;
+}
+.like {
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
 }
 </style>

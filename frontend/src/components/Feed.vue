@@ -41,6 +41,9 @@ export default {
       this.$router.push("/");
     },
   },
+  mounted() {
+    this.loadFeed();
+  },
 };
 </script>
 
